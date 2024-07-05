@@ -1,0 +1,18 @@
+
+"Games"
+{
+	"cstrike"
+	{
+		"Offsets"
+		{
+            // Find CCSBot::IsAtEnemySpawn first, and jump to which call that function
+            // And there is code for compare that function returns, and 'mov' asm code such like
+            // "mov     byte ptr [esi+1C21h], 1", 1C21h should be offset
+			"m_hasVisitedEnemySpawn"
+			{
+				"windows"		"7201"
+				"linux"			"7221"
+			}
+        }
+    }
+}
