@@ -26,8 +26,8 @@ public void OnPluginStart()
     g_cvGameTypeNext = CreateConVar("zp_gametype_next", "Default", "");
     g_cvDifficulty = CreateConVar("zp_difficulty", "1", "", .hasMin=true, .min = 1.0);
 
-    g_cvZombieTeam = CreateConVar("zp_zombieteam", "2", "");
-    g_cvHumanTeam = CreateConVar("zp_humanteam", "3", "");
+    g_cvZombieTeam = CreateConVar("zp_zombieteam", "2", "Zombie team", .hasMin=true, .min = 2.0, .hasMax=true, .max=3.0);
+    g_cvHumanTeam = CreateConVar("zp_humanteam", "3", "Human team", .hasMin=true, .min = 2.0, .hasMax=true, .max=3.0);
 
     RegServerCmd("bot_add_human", Cmd_AddBots);
     RegServerCmd("bot_add_zombie", Cmd_AddBots);

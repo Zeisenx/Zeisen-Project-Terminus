@@ -2,6 +2,15 @@
 #include <sourcemod>
 #include <sdktools>
 
+public Plugin myinfo =
+{
+	name = "CSBot custom behavior",
+	author = "Zeisen",
+	description = "Easy setup custom bot behavior setups via edit convars",
+	version = "1.01",
+	url = ""
+};
+
 #define CLIENT_INVALID 0
 
 int g_hasVisitedEnemySpawnOffset;
@@ -19,7 +28,7 @@ public void OnPluginStart()
     g_hasVisitedEnemySpawnOffset = gc.GetOffset("m_hasVisitedEnemySpawn");
     delete gc;
 
-    g_cvRushToSpawn = CreateConVar("bot_huntstate_rush_to_spawn", "1");
+    g_cvRushToSpawn = CreateConVar("bot_huntstate_rush_to_spawn", "1", .hasMin=true, .min = 0.0, .hasMax = true, .max = 1.0);
 
     HookEvent("player_spawn", OnPlayerSpawn);
 }
