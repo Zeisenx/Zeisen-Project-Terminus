@@ -65,7 +65,7 @@ public void OnAllPluginsLoaded()
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
 {
-	RegPluginLibrary("zp_fakestar_music");
+	RegPluginLibrary("zp_music");
 	CreateNative("ZMusic_PlayToClient", Native_PlayToClient);
 	CreateNative("ZMusic_PlayToAll", Native_PlayToAll);
 	
@@ -107,7 +107,7 @@ public void OnClientConnected(int client)
 
 public void OnClientPutInServer(int client)
 {
-	g_playerVol[client] = 0.1; 
+	g_playerVol[client] = 0.1; // todo : save volume to cookie
 }
 
 Action Timer_MusicRepeat(Handle timer)
@@ -225,7 +225,6 @@ void Music_PrepareMusic(const char[] keyName)
 		if (musicPath[0] == EOS)
 			continue;
 		
-		PrintToServer(musicPath);
 		PrecacheSound(musicPath);
 		Format(musicPath, sizeof(musicPath), "sound/%s", musicPath);
 		AddFileToDownloadsTable(musicPath);
@@ -382,14 +381,14 @@ bool Music_GetPath(const char[] keyName, char[] buffer, int maxlength)
 {
 	char fmtBuffer[256];
 	Format(fmtBuffer, sizeof(fmtBuffer), "list/%s/%s", g_albumName, keyName);
-	g_kvMusicInfo.GetString(fmtBuffer, buffer, maxlength, "");
+	g_kvMusicInfo.GetString(fmtBuffer, buffer, maxlength);
 	if (buffer[0] != EOS) {
 		Music_ConvertPath(buffer, maxlength);
 		return true;
 	}
 	
 	Format(fmtBuffer, sizeof(fmtBuffer), "list/generic/%s", keyName);
-	g_kvMusicInfo.GetString(fmtBuffer, buffer, maxlength, "");
+	g_kvMusicInfo.GetString(fmtBuffer, buffer, maxlength);
 	if (buffer[0] != EOS) {
 		Music_ConvertPath(buffer, maxlength);
 		return true;
@@ -401,5 +400,5 @@ bool Music_GetPath(const char[] keyName, char[] buffer, int maxlength)
 void Music_ConvertPath(char[] buffer, int maxlength)
 {
 	if (buffer[0] == '*')
-		Format(buffer, maxlength, "zp/fakestar/bgm/%s%s", g_albumName, buffer[1]);
+		Format(buffer, maxlength, "zp/bgm/%s%s", g_albumName, buffer[1]);
 }
