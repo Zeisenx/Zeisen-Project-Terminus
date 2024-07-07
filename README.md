@@ -8,3 +8,4 @@
 ## Requirements
 - [Metamod 2.0 or newer](https://www.sourcemm.net/downloads.php?branch=dev)
 - [Sourcemod 1.12 or newer](https://www.sourcemod.net/downloads.php?branch=dev)
+- [Sound Info Library 1.0.1 (Optional)](https://github.com/bcserv/soundlib)
