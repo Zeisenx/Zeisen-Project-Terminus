@@ -75,10 +75,10 @@ public void OnMapStart()
     KeyValues configKV = new KeyValues("");
 
     char filePath[256];
-    Format(filePath, sizeof(filePath), "addons/sourcemod/configs/zp_fakestar/maps/%s.cfg", mapName);
+    Format(filePath, sizeof(filePath), "addons/sourcemod/configs/zp/maps/%s.cfg", mapName);
     if (!configKV.ImportFromFile(filePath))
     {
-        ServerCommand("exec \"sourcemod/zp_fakestar/bots_default\"");
+        ServerCommand("exec \"sourcemod/zp/bots_default\"");
         LogError("Failed to find config %s", filePath);
         return;
     }
@@ -98,7 +98,7 @@ public void OnMapStart()
     char gameMode[64];
     configKV.GetString("gamemode", gameMode, sizeof(gameMode));
     g_cvGameMode.SetString(gameMode);
-    ServerCommand("exec \"sourcemod/zp_fakestar/gamemode/%s\"", gameMode);
+    ServerCommand("exec \"sourcemod/zp/gamemode/%s\"", gameMode);
 
     g_zombieTeam = configKV.GetNum("zombieteam", CS_TEAM_T);
     g_humanTeam = configKV.GetNum("humanteam", CS_TEAM_CT);
@@ -119,7 +119,6 @@ public void OnMapStart()
                 configKV.GetSectionName(configPath, sizeof(configPath));
 
                 ServerCommand("exec %s", configPath);
-                PrintToServer("[Fakestar Core] Execing %s", configPath);
             }
             while (configKV.GotoNextKey())
             configKV.GoBack();
